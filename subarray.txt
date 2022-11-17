@@ -1,0 +1,48 @@
+class Solution {
+    static int longestPerfectPiece(int[] arr, int N) {
+    //     int val=helper(0,N-1,arr);
+    //      return val;
+    // }
+    // static int helper(int i,int j,int arr[]){
+    //     if(i>arr.length || j<=0 ){
+    //         return 0;
+    //     }
+    //     else{
+    //         ArrayList<Integer>a=new ArrayList<Integer>();
+    //         for(int ii=0;ii<=j;ii++){
+    //             a.add(arr[ii]);
+                
+    //         }
+    //         Collections.sort(a);
+    //         if(a.get(a.size()-1)-a.get(0)==1){
+    //             return j-i;
+                
+    //         }
+           
+    //     }
+        
+        
+    //     int val=Math.max(helper(i+1,j,arr),helper(i,j+1,arr));
+    //     return val;
+            PriorityQueue<Integer> min = new PriorityQueue<>();
+        PriorityQueue<Integer> max = new PriorityQueue<>(Collections.reverseOrder());
+        int i=0,j=0;
+        int ans=0;
+        while(j<N){
+            min.add(arr[j]);
+            max.add(arr[j]);
+             while(i<=j && max.peek() - min.peek()>1){    
+             min.remove(arr[i]);
+             max.remove(arr[i]);
+             i++;
+             }
+             ans = Math.max(ans,j-i+1);
+            j++;
+        }
+        return ans;
+
+        
+    }
+    
+    
+};
